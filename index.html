@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Speed Zone Kareem | تحدي الفورمولا 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#ECEFF2;--surface:#fff;--ink:#14171A;--muted:#5C6670;--line:#D3D9DF;--accent:#FFC400;--accent-ink:#1A1400;--red:#E10600;--ok:#14935A;--okbg:#D6F3E5;--badbg:#FBDAD8;--lamp-off:#C9CFD6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0F1114;--surface:#1A1D22;--ink:#F3F4F6;--muted:#9AA3AE;--line:#2C3138;--ok:#35D08A;--okbg:#12362A;--badbg:#401A18;--lamp-off:#2A2F36}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0F1114;--surface:#1A1D22;--ink:#F3F4F6;--muted:#9AA3AE;--line:#2C3138;--ok:#35D08A;--okbg:#12362A;--badbg:#401A18;--lamp-off:#2A2F36}
+*,*:before,*:after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Tajawal',Tahoma,Arial,sans-serif;line-height:1.6}
+main{max-width:520px;margin:0 auto;padding:22px 16px 48px;min-height:100vh}
+.lights{display:flex;gap:10px;justify-content:center;margin:10px 0 22px}
+.lamp{width:42px;height:42px;border-radius:50%;background:var(--lamp-off);border:3px solid var(--line);transition:background .15s}
+.lamp.on{background:var(--red);border-color:var(--red);box-shadow:0 0 18px var(--red)}
+h1{font-size:34px;font-weight:900;line-height:1.2;margin:0 0 6px;text-align:center}
+.sub{color:var(--muted);text-align:center;margin:0 0 24px}
+.btn{display:block;width:100%;background:var(--accent);color:var(--accent-ink);border:0;border-radius:12px;padding:15px;font:inherit;font-weight:900;font-size:18px;cursor:pointer}
+.btn:focus-visible,.ans:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.rules{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:0 0 18px;color:var(--muted);font-size:15px}
+.rules b{color:var(--ink)}
+.best{text-align:center;color:var(--muted);margin-top:14px}
+.top{display:flex;justify-content:space-between;align-items:center;font-weight:700;margin-bottom:10px}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin-bottom:18px}
+.bar i{display:block;height:100%;width:100%;background:var(--accent);transform-origin:right;transition:transform .2s linear}
+.q{font-size:22px;font-weight:700;line-height:1.5;margin:0 0 16px;min-height:66px}
+.ans{display:block;width:100%;text-align:right;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;margin-bottom:10px;font:inherit;font-size:17px;color:inherit;cursor:pointer}
+.ans.ok{background:var(--okbg);border-color:var(--ok)}
+.ans.bad{background:var(--badbg);border-color:var(--red)}
+.ans:disabled{cursor:default}
+.fb{min-height:30px;font-weight:700;margin:4px 0 10px}
+.score{font-size:64px;font-weight:900;text-align:center;margin:0;line-height:1.1}
+.rank{font-size:22px;font-weight:700;text-align:center;margin:6px 0 18px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
+.stat b{display:block;font-size:24px}.stat span{color:var(--muted);font-size:14px}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:4px}.brand .t{flex:1}.logo{background:var(--accent);color:var(--accent-ink);font-weight:900;font-size:20px;padding:6px 10px;border-radius:8px;transform:skewX(-10deg);letter-spacing:1px;direction:ltr}.brand b{display:block;font-size:19px;direction:ltr;text-align:right;line-height:1.3}.brand span{color:var(--muted);font-size:13px}.mute{background:var(--surface);border:1.5px solid var(--line);color:var(--ink);border-radius:10px;width:44px;height:44px;font-size:20px;cursor:pointer}.mute:focus-visible{outline:3px solid var(--ink);outline-offset:2px}.foot{text-align:center;color:var(--muted);margin-top:28px;font-size:14px}.foot b{color:var(--ink);direction:ltr;unicode-bidi:isolate}
+#nick{width:100%;font:inherit;color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:12px;margin-bottom:6px}#nick:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.onl{display:flex;align-items:center;gap:8px;color:var(--muted);margin-bottom:10px}.dot{width:10px;height:10px;border-radius:50%;background:var(--ok)}
+.board{list-style:none;padding:0;margin:10px 0}.board li{display:flex;justify-content:space-between;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:6px}.board li.me{border-color:var(--accent);border-width:2px}.board li span:first-child{font-weight:700}
+.feed{color:var(--muted);font-size:14px;min-height:22px}
+.qrow{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+.pic{flex:0 0 76px;height:76px;border-radius:18px;background:var(--surface);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:44px;transform:rotate(-4deg);animation:pop .4s}
+.qrow .q{margin:0;min-height:0;font-size:20px}
+.mas{display:flex;gap:10px;align-items:center;margin:6px 0 12px}
+.mface{font-size:40px;line-height:1}
+.bubble{flex:1;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:8px 12px;font-weight:700;font-size:15px}
+.ghost{background:var(--surface)!important;color:var(--ink)!important;border:1.5px solid var(--line)!important;margin-top:10px}
+@keyframes pop{from{transform:scale(.3) rotate(-20deg);opacity:0}to{transform:scale(1) rotate(-4deg);opacity:1}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+@keyframes fall{from{transform:translateY(-10vh) rotate(0);opacity:1}to{transform:translateY(105vh) rotate(360deg);opacity:0}}
+.shake{animation:shake .4s}
+.fx{position:fixed;top:0;font-size:28px;pointer-events:none;animation:fall 1.4s ease-in forwards;z-index:50}
+@media (prefers-reduced-motion:reduce){.pic,.shake{animation:none}.fx{display:none}}
+.track{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:6px 10px;margin-bottom:12px}
+.lane{display:flex;align-items:center;gap:8px;height:24px}.lane+.lane{border-top:1px dashed var(--line)}
+.ln{flex:0 0 74px;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lane.me .ln{color:var(--ink);font-weight:800}
+.rail{position:relative;flex:1;height:100%}
+.rail:after{content:'🏁';position:absolute;left:0;top:50%;transform:translateY(-50%);font-size:15px}
+.car{position:absolute;top:50%;right:0;font-size:19px;line-height:1;transform:translateY(-50%);transition:right .8s ease-out}
+.lane.me .car{filter:drop-shadow(0 0 6px var(--accent))}
+@media (prefers-reduced-motion:reduce){.car{transition:none}}
+.hero{position:relative;height:160px;border-radius:16px;overflow:hidden;background:#12161B;border:1px solid var(--line);margin:4px 0 14px}
+.hero:before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 60px,rgba(255,255,255,.07) 60px 63px);animation:dash 1s linear infinite}
+.road{position:absolute;left:0;right:0;bottom:14px;height:4px;background:repeating-linear-gradient(90deg,#fff 0 24px,transparent 24px 48px);opacity:.55;animation:dash .5s linear infinite}
+.hcar{position:absolute;font-size:30px;line-height:1;animation:zoom 3s linear infinite}
+.c1{bottom:26px}.c2{bottom:44px;animation-delay:-1s;filter:hue-rotate(200deg)}.c3{bottom:8px;animation-delay:-2s;filter:hue-rotate(90deg)}
+.word{position:absolute;top:12px;right:16px;font-weight:900;font-size:38px;line-height:.95;letter-spacing:2px;font-style:italic;color:#fff;direction:ltr;text-align:right;text-shadow:0 2px 0 #E10600}
+.word span{display:block}.word .y{color:#FFC400}.word .k{font-size:14px;letter-spacing:7px;font-style:normal;color:#9AA3AE;text-shadow:none;margin-top:6px}
+@keyframes dash{to{background-position:48px 0}}
+@keyframes zoom{from{right:-12%}to{right:112%}}
+.stats3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 16px}
+.stats3 div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.stats3 b{display:block;font-size:22px}.stats3 span{color:var(--muted);font-size:13px}
+#card{width:100%;border-radius:16px;display:block;margin:0 0 6px}
+@media (prefers-reduced-motion:reduce){.hero:before,.road,.hcar{animation:none}.hcar{right:40%}}
+.volrow{display:flex;align-items:center;gap:10px;color:var(--muted);margin:2px 0 10px;font-size:14px}#vol{flex:1;accent-color:var(--accent);height:28px}#volv{min-width:38px;text-align:left;direction:ltr}
+.hide{display:none}
+@media (prefers-reduced-motion:reduce){.lamp,.bar i{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<header class="brand"><div class="logo" aria-hidden="true">SZ</div><div class="t"><b>Speed Zone Kareem</b><span>قناة يوتيوب · مسابقات الفورمولا 1</span></div><button class="mute" id="mute" aria-label="كتم الصوت" aria-pressed="false">🔊</button></header>
+<div class="volrow"><span aria-hidden="true">🎵</span><input type="range" id="vol" min="0" max="100" value="50" aria-label="مستوى الموسيقى"><span id="volv">50%</span><button class="mute" id="mstyle" aria-label="موسيقى سباق">🏁</button></div>
+<div class="lights" id="lights" aria-hidden="true"><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div></div>
+
+<section id="home">
+  <div class="hero" aria-hidden="true"><div class="road"></div><span class="hcar c1">🏎️</span><span class="hcar c2">🏎️</span><span class="hcar c3">🏎️</span><div class="word"><span>SPEED</span><span class="y">ZONE</span><span class="k">KAREEM</span></div></div>
+  <div class="stats3"><div><b>100</b><span>سؤال</span></div><div><b>4</b><span>عربيات</span></div><div><b>15</b><span>ثانية للسؤال</span></div></div>
+  <h1>تحدي الفورمولا 1</h1>
+  <p class="sub">مسابقة قناة Speed Zone Kareem. 10 أسئلة، و15 ثانية لكل سؤال. هل تقدر تتصدر الشبكة؟</p>
+  <div class="rules">كل إجابة صحيحة تعطيك <b>100 نقطة</b> وتزيد حتى <b>50 نقطة</b> إضافية كلما أجبت أسرع. كل <b>3 إجابات صحيحة متتالية</b> تمنحك مكافأة 30 نقطة.</div>
+  <button class="btn" id="start">ابدأ السباق</button>
+  <p class="best" id="best"></p>
+  <div class="hide" id="online">
+    <h2>العالم الأونلاين</h2>
+    <div class="onl"><span class="dot" aria-hidden="true"></span><span id="onl">متصل الآن: 1</span></div>
+    <input id="nick" maxlength="20" placeholder="اسمك في لوحة المتصدرين" autocomplete="nickname">
+    <ol class="board" id="board"></ol>
+    <div class="feed" id="feed" role="status"></div>
+  </div>
+</section>
+
+<section id="game" class="hide">
+  <div class="top"><span id="prog"></span><span id="pts"></span></div>
+  <div class="track" id="track" role="img" aria-label="مضمار السباق"></div>
+  <div class="bar"><i id="timer"></i></div>
+  <div class="qrow"><div class="pic" id="pic" aria-hidden="true"></div><p class="q" id="q"></p></div>
+  <div id="opts"></div>
+  <div class="fb" id="fb" role="status"></div>
+  <div class="mas"><div class="mface" id="mface" aria-hidden="true">🤔</div><div class="bubble" id="bubble"></div></div>
+  <button class="btn hide" id="next">السؤال التالي</button>
+</section>
+
+<section id="end" class="hide">
+  <p class="score" id="final"></p>
+  <p class="rank" id="rank"></p>
+  <p class="best" id="joke"></p>
+  <img id="card" alt="بطاقة نتيجتك">
+  <p class="best" style="margin:0 0 14px">اضغط مطولاً على البطاقة لحفظها ومشاركتها</p>
+  <div class="stats">
+    <div class="stat"><b id="s1"></b><span>إجابات صحيحة</span></div>
+    <div class="stat"><b id="s2"></b><span>أفضل سلسلة</span></div>
+  </div>
+  <button class="btn" id="again">سباق جديد</button>
+  <button class="btn ghost" id="share">شارك نتيجتك</button>
+  <p class="best" id="saved" role="status"></p>
+  <p class="best" id="best2"></p>
+</section>
+<p class="foot">اشترك في قناة <b>Speed Zone Kareem</b> على يوتيوب لمزيد من المسابقات</p>
+</main>
+
+<script>
+// الإجابة الصحيحة دائماً أول خيار في المصفوفة، ثم تُخلط عند العرض
+var BANK=[
+['كم لقباً عالمياً فاز به لويس هاميلتون؟',['7 ألقاب','5 ألقاب','6 ألقاب','8 ألقاب']],
+['في أي عام أُقيم أول سباق ضمن بطولة العالم للفورمولا 1؟',['1950','1938','1962','1971']],
+['في أي دولة تقع حلبة سبا-فرانكورشان؟',['بلجيكا','فرنسا','ألمانيا','هولندا']],
+['ماذا يعني العلم الأحمر في السباق؟',['إيقاف السباق','خطر في الحلبة فقط','آخر لفة','دخول سيارة الأمان']],
+['ماذا يعني العلم الأزرق؟',['أفسح الطريق لسائق أسرع','ابتعد عن الحلبة','ممنوع التجاوز','بدء السباق']],
+['ما معنى DRS؟',['نظام تقليل مقاومة الهواء','نظام تبريد المحرك','نظام الفرامل الذكي','نظام استرجاع الطاقة']],
+['كم نقطة يحصل عليها الفائز بالسباق الرئيسي؟',['25','20','30','15']],
+['من أصغر سائق يتوّج بطلاً للعالم في تاريخ البطولة؟',['سيباستيان فيتيل','ماكس فيرستابن','فرناندو ألونسو','لويس هاميلتون']],
+['ما جنسية أيرتون سينا؟',['برازيلي','إيطالي','فرنسي','أرجنتيني']],
+['في أي بلد تقع حلبة ياس مارينا؟',['الإمارات','قطر','البحرين','السعودية']],
+['على أي حلبة يقام سباق جائزة السعودية الكبرى؟',['كورنيش جدة','الرياض','نيوم','الظهران']],
+['ماذا يعني الانطلاق من البول بوزشن؟',['الانطلاق من المركز الأول','الانطلاق من آخر الشبكة','أسرع لفة في السباق','دخول الصيانة أولاً']],
+['كم لقباً متتالياً فاز به مايكل شوماخر مع فيراري؟',['5 ألقاب','3 ألقاب','4 ألقاب','7 ألقاب']],
+['ما وظيفة نظام الهالو في السيارة؟',['حماية رأس السائق','تحسين التبريد','زيادة السرعة','تقليل الوزن']],
+['ما الفريق الإيطالي الأشهر في الفورمولا 1 ولونه الأحمر؟',['فيراري','ماكلارين','ويليامز','ريد بُل']],
+['كم يستغرق أسرع تغيير إطارات في الصيانة تقريباً؟',['أقل من 3 ثوانٍ','حوالي 10 ثوانٍ','حوالي 20 ثانية','حوالي 30 ثانية']],
+['ماذا يحدث عند نزول سيارة الأمان إلى الحلبة؟',['تتباطأ السيارات ولا يُسمح بالتجاوز','يتوقف السباق نهائياً','ينتهي السباق','تُلغى النقاط']],
+['كم لقباً عالمياً فاز به ماكس فيرستابن حتى عام 2024؟',['4 ألقاب','3 ألقاب','5 ألقاب','2 لقبان']],
+['سباق موناكو يقام على حلبة من نوع؟',['حلبة شوارع','حلبة صحراوية','حلبة بيضاوية','حلبة مائية']],
+['أي فريق يقع مقره في مدينة ووكينغ البريطانية؟',['ماكلارين','فيراري','مرسيدس','ويليامز']],
+['أي شركة تورّد الإطارات لجميع فرق الفورمولا 1؟',['بيريلي','ميشلان','بريدجستون','جودير']],
+['حلبة مونزا الملقبة بمعبد السرعة تقع في أي دولة؟',['إيطاليا','إسبانيا','النمسا','المجر']],
+['من هو السائق الملقب بالبروفيسور؟',['آلان بروست','نيكي لاودا','نايجل مانسل','دامون هيل']],
+['من هو السائق الملقب بالرجل الجليدي؟',['كيمي رايكونن','ميكا هاكينن','نيكو روزبرغ','جنسون باتن']],
+['من أول بطل عالم في تاريخ الفورمولا 1 عام 1950؟',['جوزيبي فارينا','خوان مانويل فانجيو','ستيرلينغ موس','جاك برابهام']],
+['أي فريق هو الأكثر فوزاً ببطولة الصانعين؟',['فيراري','ماكلارين','ويليامز','مرسيدس']],
+['ماذا يعني علم الشطرنج ذو المربعات البيضاء والسوداء؟',['نهاية السباق','بدء السباق','خطر على الحلبة','التوقف في الصيانة']],
+['ماذا يعني العلم الأصفر؟',['خطر، خفف السرعة ولا تتجاوز','السباق انتهى','أفسح الطريق','الحلبة آمنة']],
+['في أي دولة تقع حلبة سيلفرستون؟',['بريطانيا','إيطاليا','اليابان','أستراليا']],
+['من فاز بلقب العالم عام 2008 بفارق نقطة واحدة في آخر سباق؟',['لويس هاميلتون','فيليبي ماسا','فرناندو ألونسو','كيمي رايكونن']],
+['الإطار الأحمر (الناعم) يتميز بـ؟',['تماسك أعلى وتآكل أسرع','تماسك أقل وعمر أطول','مخصص للمطر فقط','لا يُستخدم في السباقات']],
+['ما لون إطارات المطر الغزير؟',['أزرق','أخضر','أصفر','أبيض']],
+['أول سباق للفورمولا 1 في الشرق الأوسط أُقيم في أي بلد؟',['البحرين','الإمارات','قطر','السعودية']],
+['من صاحب أكثر عدد من مراكز البول بوزشن؟',['لويس هاميلتون','مايكل شوماخر','آيرتون سينا','سيباستيان فيتيل']],
+['السرعة القصوى لسيارة الفورمولا 1 تتجاوز تقريباً؟',['350 كم/س','200 كم/س','250 كم/س','150 كم/س']],
+['ماذا تعني كلمة بيت ستوب؟',['توقف الصيانة لتغيير الإطارات','دخول سيارة الأمان','نهاية السباق','عقوبة بالمرور بالحارة']],
+['ما الفريق الذي يرتدي سائقوه تقليدياً زيّاً أحمر ويملك الحصان الجامح شعاراً؟',['فيراري','ريد بُل','ماكلارين','ألبين']],
+["من أصغر سائق فاز بسباق في تاريخ الفورمولا 1؟", ["ماكس فيرستابن", "سيباستيان فيتيل", "لويس هاميلتون", "فرناندو ألونسو"]],
+["في أي عام فاز ماكس فيرستابن بلقبه العالمي الأول؟", ["2021", "2019", "2022", "2020"]],
+["من فاز بلقب العالم عام 2016؟", ["نيكو روزبرغ", "لويس هاميلتون", "سيباستيان فيتيل", "دانيال ريكاردو"]],
+["من فاز بلقب العالم عام 2007 مع فيراري؟", ["كيمي رايكونن", "فيليبي ماسا", "فرناندو ألونسو", "لويس هاميلتون"]],
+["كم لقباً عالمياً فاز به سيباستيان فيتيل؟", ["4 ألقاب", "3 ألقاب", "5 ألقاب", "2 لقبان"]],
+["كم لقباً عالمياً فاز به فرناندو ألونسو؟", ["لقبان", "3 ألقاب", "لقب واحد", "4 ألقاب"]],
+["كم لقباً عالمياً فاز به أيرتون سينا؟", ["3 ألقاب", "2 لقبان", "4 ألقاب", "5 ألقاب"]],
+["كم لقباً عالمياً فاز به آلان بروست؟", ["4 ألقاب", "3 ألقاب", "5 ألقاب", "لقبان"]],
+["كم لقباً عالمياً فاز به خوان مانويل فانجيو؟", ["5 ألقاب", "4 ألقاب", "3 ألقاب", "6 ألقاب"]],
+["من فاز بلقب العالم عام 1996 مع ويليامز؟", ["ديمون هيل", "نايجل مانسل", "ديفيد كولثارد", "جيرهارد بيرغر"]],
+["من فاز بلقبي العالم 1998 و1999؟", ["ميكا هاكينن", "ديفيد كولثارد", "إيدي إرفاين", "رالف شوماخر"]],
+["من فاز بلقب العالم عام 2009 مع براون جي بي؟", ["جنسون باتن", "روبنز باريكيلو", "سيباستيان فيتيل", "مارك ويبر"]],
+["أي فريق فاز بلقب الصانعين من 2014 إلى 2021 متتالياً؟", ["مرسيدس", "ريد بُل", "فيراري", "ماكلارين"]],
+["في أي دولة تقع حلبة سوزوكا؟", ["اليابان", "الصين", "كوريا الجنوبية", "سنغافورة"]],
+["في أي دولة تقع حلبة مارينا باي التي تُقام ليلاً؟", ["سنغافورة", "ماليزيا", "تايلاند", "إندونيسيا"]],
+["حلبة إنترلاغوس تقع في أي دولة؟", ["البرازيل", "الأرجنتين", "المكسيك", "تشيلي"]],
+["حلبة ألبرت بارك تقع في أي مدينة؟", ["ملبورن", "سيدني", "بيرث", "بريزبين"]],
+["في أي دولة تقع حلبة كاتالونيا؟", ["إسبانيا", "البرتغال", "فرنسا", "إيطاليا"]],
+["في أي دولة تقع حلبة ريد بُل رينغ؟", ["النمسا", "سويسرا", "ألمانيا", "المجر"]],
+["في أي دولة تقع حلبة هنغارورينغ؟", ["المجر", "رومانيا", "التشيك", "بولندا"]],
+["في أي دولة تقع حلبة زاندفورت؟", ["هولندا", "بلجيكا", "ألمانيا", "الدنمارك"]],
+["حلبة جيل فيلنوف تقع في أي دولة؟", ["كندا", "أمريكا", "المكسيك", "بريطانيا"]],
+["حلبة الأمريكتين COTA تقع في أي ولاية؟", ["تكساس", "فلوريدا", "نيفادا", "كاليفورنيا"]],
+["الحلبة الشمالية المعروفة بالجحيم الأخضر تقع في أي دولة؟", ["ألمانيا", "النمسا", "سويسرا", "هولندا"]],
+["حلبة لوسيل تقع بالقرب من أي مدينة؟", ["الدوحة", "دبي", "الرياض", "الكويت"]],
+["في أي عام أُقيم أول سباق لجائزة السعودية الكبرى؟", ["2021", "2019", "2022", "2020"]],
+["ما اسم الحلبة التي تُقام عليها جائزة إيطاليا الكبرى؟", ["مونزا", "إيمولا", "موجيلو", "ميلانو"]],
+["حلبة موناكو تقع في منطقة اسمها؟", ["مونت كارلو", "نيس", "كان", "جنوة"]],
+["ما أطول حلبة في تقويم الفورمولا 1 الحالي؟", ["سبا-فرانكورشان", "موناكو", "مونزا", "سوزوكا"]],
+["ما أقصر حلبة في تقويم الفورمولا 1 الحالي؟", ["موناكو", "سبا-فرانكورشان", "مونزا", "الأمريكتين"]],
+["ما لون الإطار المتوسط Medium؟", ["أصفر", "أبيض", "أحمر", "أخضر"]],
+["ما لون إطار المطر الخفيف Intermediate؟", ["أخضر", "أزرق", "أصفر", "برتقالي"]],
+["ما لون الإطار الصلب Hard؟", ["أبيض", "أصفر", "أحمر", "أزرق"]],
+["ماذا يعني العلم الأخضر؟", ["انتهى الخطر والمسار آمن", "توقف السباق", "آخر لفة", "ممنوع التجاوز"]],
+["ماذا يعني العلم الأسود الموجّه لسائق؟", ["استبعاده من السباق", "لفة أخيرة", "دخول الصيانة فقط", "بدء السباق"]],
+["ماذا يعني العلم الأصفر المخطط بالأحمر؟", ["سطح زلق على المسار", "نهاية السباق", "سيارة الأمان", "خطأ في الانطلاق"]],
+["كم نقطة يحصل عليها صاحب المركز الثاني في السباق؟", ["18", "20", "15", "16"]],
+["كم نقطة يحصل عليها صاحب المركز الثالث في السباق؟", ["15", "12", "16", "10"]],
+["كم سائقاً يحصل على نقاط في السباق الرئيسي؟", ["10", "8", "12", "15"]],
+["كم مرحلة في التصفيات Qualifying؟", ["3 مراحل", "مرحلتان", "4 مراحل", "5 مراحل"]],
+["ما اسم السباق القصير الذي يُقام في بعض نهايات الأسابيع؟", ["السبرينت", "الدراغ", "الرالي", "الماراثون"]],
+["ماذا يعني نظام Parc Fermé؟", ["منع تعديل السيارات بين التصفيات والسباق", "منطقة مشجعين", "تغيير الإطارات مجاناً", "وقت راحة للسائقين"]],
+["أي فريق يشتهر بلونه البرتقالي المميز؟", ["ماكلارين", "ريد بُل", "ألبين", "هاس"]],
+["ما اللونان المميزان لسيارات مرسيدس؟", ["الفضي والأسود", "الأحمر والأبيض", "الأخضر والأصفر", "الأزرق والبرتقالي"]],
+["أي فريق يشتهر بلونه الأخضر الداكن؟", ["أستون مارتن", "ماكلارين", "ويليامز", "هاس"]],
+["أي شركة سيارات تملك فريق ألبين؟", ["رينو", "هوندا", "أودي", "بي إم دبليو"]],
+["من المصمم الشهير الذي فازت سياراته بألقاب مع ويليامز وماكلارين وريد بُل؟", ["أدريان نيوي", "روس براون", "ستيفانو دومينيكالي", "أندريا ستيلا"]],
+["ما لقب مايكل شوماخر الشهير؟", ["البارون الأحمر", "الرجل الجليدي", "الأسد", "البروفيسور"]],
+["من السائق الذي يُلقّب بـ ماد ماكس؟", ["ماكس فيرستابن", "لاندو نوريس", "تشارلز لوكلير", "جورج راسل"]],
+["تشارلز لوكلير سائق من أي بلد؟", ["موناكو", "إيطاليا", "فرنسا", "بلجيكا"]],
+["ما جنسية السائق أوسكار بياستري؟", ["أسترالي", "نيوزيلندي", "بريطاني", "كندي"]],
+["ما جنسية السائق لاندو نوريس؟", ["بريطاني", "أسترالي", "كندي", "ألماني"]],
+["كم يبلغ الوزن الأدنى لسيارة الفورمولا 1 مع السائق تقريباً؟", ["حوالي 800 كجم", "حوالي 500 كجم", "حوالي 1200 كجم", "حوالي 1500 كجم"]],
+["ما نوع محرك سيارات الفورمولا 1 حتى عام 2025؟", ["V6 توربو هجين سعة 1.6 لتر", "V8 سعة 2.4 لتر", "V10 سعة 3 لتر", "V12 سعة 6 لتر"]],
+["ما اسم نظام استرجاع الطاقة الكهربائية في السيارة؟", ["ERS", "ABS", "GPS", "ESP"]],
+["ما وظيفة الجناحين الأمامي والخلفي؟", ["توليد قوة ضغط لتحسين الثبات", "تبريد الفرامل", "زيادة الوزن", "تغيير لون السيارة"]],
+["ماذا يعني تجاوز حدود المسار Track Limits؟", ["خروج السيارة عن الخطوط البيضاء لتحقيق ميزة", "تغيير الإطارات", "التجاوز من اليمين", "دخول الصيانة"]],
+["ماذا تعني عقوبة Stop-Go؟", ["التوقف في الصيانة لمدة العقوبة ثم المتابعة", "استبعاد السائق", "الانطلاق آخر الشبكة", "خسارة كل النقاط"]],
+["ماذا تعني استراتيجية Undercut؟", ["دخول الصيانة قبل المنافس للاستفادة من إطارات جديدة", "التجاوز في المنعطفات", "تقليل سرعة المحرك", "الانطلاق من الصيانة"]],
+["ما الاحتفال التقليدي لأصحاب المراكز الأولى على المنصة؟", ["رش الشمبانيا", "رمي الزهور", "الغناء", "الرقص"]],
+["كم لفة تقريباً في سباق موناكو؟", ["حوالي 78 لفة", "حوالي 50 لفة", "حوالي 60 لفة", "حوالي 100 لفة"]],
+["كم مرة فاز مايكل شوماخر بلقب العالم؟", ["7 مرات", "6 مرات", "5 مرات", "8 مرات"]],
+["فريق ويليامز بريطاني، من أي بلد هو؟", ["بريطانيا", "إيطاليا", "ألمانيا", "فرنسا"]]
+];
+var QN=10,TL=15,KEY='f1quiz-best-v1';
+var $=function(i){return document.getElementById(i)};
+var lamps=document.querySelectorAll('.lamp');
+var S,timerId,deadline,locked;
+
+function show(id){['home','game','end'].forEach(function(x){$(x).classList.toggle('hide',x!==id)})}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function best(){try{return +localStorage.getItem(KEY)||0}catch(e){return 0}}
+function setBest(v){try{localStorage.setItem(KEY,v)}catch(e){}}
+function showBest(){var b=best();var t=b?'أفضل نتيجة لك: '+b+' نقطة':'';$('best').textContent=t;$('best2').textContent=t}
+function lampsSet(n){lamps.forEach(function(l,i){l.classList.toggle('on',i<n)})}
+
+function start(){
+  initAudio();musicStop();buildTrack();rev();
+  S={qs:shuffle(BANK).slice(0,QN),i:0,pts:0,ok:0,streak:0,maxStreak:0};
+  $('start').disabled=true;$('again').disabled=true;
+  var n=0;lampsSet(0);
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var step=reduce?0:450;
+  var iv=setInterval(function(){
+    n++;lampsSet(n);sfx('beep');
+    if(n===5){clearInterval(iv);setTimeout(function(){lampsSet(0);sfx('go');musicStart();$('start').disabled=false;$('again').disabled=false;show('game');ask()},step?700:0)}
+  },step||1);
+}
+
+function ask(){
+  locked=false;
+  var item=S.qs[S.i];
+  $('prog').textContent='السؤال '+(S.i+1)+' من '+QN+' · المركز '+placeNow()+' من 4';
+  $('pts').textContent=S.pts+' نقطة';
+  $('q').textContent=item[0];$('pic').textContent=iconFor(item[0]);$('pic').style.animation='none';void $('pic').offsetWidth;$('pic').style.animation='';say('🤔',pickOne(IDLE));lastSec=0;sfx2('fly');if(musicOn)step=(S.i%4)*16;
+  $('fb').textContent='';$('fb').style.color='';
+  $('next').classList.add('hide');
+  var correct=item[1][0];
+  $('opts').innerHTML='';
+  shuffle(item[1]).forEach(function(o){
+    var b=document.createElement('button');b.className='ans';b.textContent=o;
+    b.onclick=function(){pick(b,o===correct,correct)};
+    $('opts').appendChild(b);
+  });
+  deadline=Date.now()+TL*1000;
+  clearInterval(timerId);
+  tick();timerId=setInterval(tick,100);
+}
+function tick(){
+  var left=Math.max(0,deadline-Date.now());
+  $('timer').style.transform='scaleX('+(left/(TL*1000))+')';var sec=Math.ceil(left/1000);if(!locked&&sec<=5&&sec>0&&sec!==lastSec){lastSec=sec;sfx2('tick')}
+  if(left<=0&&!locked){pick(null,false,S.qs[S.i][1][0])}
+}
+function pick(btn,isOk,correct){
+  if(locked)return;locked=true;clearInterval(timerId);
+  var left=Math.max(0,deadline-Date.now());
+  document.querySelectorAll('.ans').forEach(function(b){b.disabled=true;if(b.textContent===correct)b.classList.add('ok')});
+  var fb=$('fb');
+  if(isOk){
+    var gain=100+Math.round(50*left/(TL*1000));
+    S.streak++;S.ok++;if(S.streak>S.maxStreak)S.maxStreak=S.streak;
+    var bonus=S.streak%3===0?30:0;
+    S.pts+=gain+bonus;raceStep(true,left/(TL*1000));
+    fb.textContent='إجابة صحيحة! +'+(gain+bonus)+' نقطة'+(bonus?' (مكافأة السلسلة)':'');
+    fb.style.color='var(--ok)';sfx('ok');say(pickOne(['😎','🤩','🥳']),S.streak>=3?'سلسلة نار! '+S.streak+' على التوالي 🔥':pickOne(OKL));burst(['🏆','🏁','🔥','⭐']);sfx2('pass');
+  }else{
+    S.streak=0;raceStep(false,0);
+    if(btn)btn.classList.add('bad');
+    fb.textContent=btn?'إجابة خاطئة. الصحيح: '+correct:'انتهى الوقت. الصحيح: '+correct;
+    fb.style.color='var(--red)';sfx('bad');if(btn){say(pickOne(['😵','🤪','🙈']),pickOne(BADL));shakeIt()}else say('😴',pickOne(TIMEL));sfx2(btn?'skid':'sputter');
+  }
+  $('pts').textContent=S.pts+' نقطة';
+  var nx=$('next');nx.textContent=S.i===QN-1?'اعرض النتيجة':'السؤال التالي';nx.classList.remove('hide');nx.focus();
+}
+function next(){
+  S.i++;
+  if(S.i>=QN)finish();else ask();
+}
+function finish(){
+  var p=S.pts,prev=best();
+  if(p>prev)setBest(p);
+  var r=p>=1300?'بطل العالم 🏆':p>=1000?'سائق المنصة 🥇':p>=700?'سائق وسط الشبكة 🏎️':p>=400?'سائق مبتدئ 🛵':'متدرب في الكراج 🔧';
+  $('joke').textContent=p>=1300?'فيراري عايزاك معاها بكرة الصبح! 📞':p>=1000?'شامبانيا على المنصة وإنت اللي هتفتحها 🍾':p>=700?'أداء محترم، بس لسه فيه مجال للتحسين 😅':p>=400?'كمّل تدريب، السواقة محتاجة صبر 🛵':'حتى سيارة الأمان كانت هتسبقك 🐢';
+  if(p>=700)burst(['🏆','🎉','🏁','🔥']);
+  $('final').textContent=p;
+  $('rank').textContent=r+(p>prev&&prev>0?' · رقم قياسي جديد!':'');
+  var pl=placeNow();$('joke').textContent='المركز '+pl+' من 4 في السباق · '+$('joke').textContent;if(pl===1)burst(['🏆','🏁','🥇','🎉']);try{$('card').src=drawCard(p,r,pl)}catch(e){}
+  $('s1').textContent=S.ok+' / '+QN;
+  $('s2').textContent=S.maxStreak;
+  showBest();show('end');musicStop();sfx('win');submitScore(p);
+}
+var BOTS=[{n:'سيد الصاروخ',s:8.4,v:1.6,h:200},{n:'عم فتحي',s:7,v:2.2,h:90},{n:'بنزينة',s:5.4,v:2.4,h:300}];
+var pos=[0,0,0,0];
+function buildTrack(){var t=$('track');t.innerHTML='';pos=[0,0,0,0];
+  ['إنت'].concat(BOTS.map(function(b){return b.n})).forEach(function(n,i){
+    var l=document.createElement('div');l.className='lane'+(i===0?' me':'');
+    var a=document.createElement('div');a.className='ln';a.textContent=n;
+    var r=document.createElement('div');r.className='rail';
+    var c=document.createElement('span');c.className='car';c.id='car'+i;c.textContent='🏎️';
+    if(i>0)c.style.filter='hue-rotate('+BOTS[i-1].h+'deg)';
+    r.appendChild(c);l.appendChild(a);l.appendChild(r);t.appendChild(l)})}
+function drive(i,add){pos[i]=Math.min(88,pos[i]+add);$('car'+i).style.right=pos[i]+'%'}
+function placeNow(){var n=1;for(var i=1;i<4;i++)if(pos[i]>pos[0])n++;return n}
+function raceStep(ok,frac){drive(0,ok?8.2+frac*1.8:1.5);BOTS.forEach(function(b,i){drive(i+1,Math.max(1,b.s+(Math.random()*2-1)*b.v))});$('prog').textContent='السؤال '+(S.i+1)+' من '+QN+' · المركز '+placeNow()+' من 4'}
+function rev(){if(!AC)return;var t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type='sawtooth';o.frequency.setValueAtTime(60,t);o.frequency.exponentialRampToValueAtTime(360,t+1.2);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.25,t+0.2);g.gain.exponentialRampToValueAtTime(0.0001,t+1.4);o.connect(g);g.connect(master);o.start(t);o.stop(t+1.5)}
+function drawCard(p,r,pl){
+  var c=document.createElement('canvas');c.width=c.height=1080;var x=c.getContext('2d');
+  var g=x.createLinearGradient(0,0,1080,1080);g.addColorStop(0,'#10141A');g.addColorStop(1,'#24303C');x.fillStyle=g;x.fillRect(0,0,1080,1080);
+  x.fillStyle='#E10600';x.beginPath();x.moveTo(0,930);x.lineTo(1080,800);x.lineTo(1080,860);x.lineTo(0,990);x.fill();
+  x.fillStyle='#FFC400';x.fillRect(0,0,1080,16);
+  x.textAlign='center';
+  x.direction='ltr';x.font='italic 900 64px Tajawal,Arial';x.fillText('SPEED ZONE KAREEM',540,130);
+  x.direction='rtl';
+  x.fillStyle='#fff';x.font='900 300px Tajawal,Arial';x.fillText(String(p),540,500);
+  x.fillStyle='#9AA3AE';x.font='700 54px Tajawal,Arial';x.fillText('نقطة في تحدي الفورمولا 1',540,590);
+  x.fillStyle='#fff';x.font='900 80px Tajawal,Arial';x.fillText(r,540,710);
+  x.fillStyle='#FFC400';x.font='700 52px Tajawal,Arial';x.fillText('المركز '+pl+' من 4 في السباق',540,800);
+  x.fillStyle='#fff';x.font='700 46px Tajawal,Arial';x.fillText('تقدر تكسر رقمي؟ العب الآن 🏁',540,1030);
+  return c.toDataURL('image/png');
+}
+var ICONS=[['الشمبانيا','🍾'],['محرك','⚙️'],['الجناح','🪽'],['اليابان','🗾'],['سنغافورة','🌃'],['علم','🏁'],['إطار','🛞'],['الهالو','🪖'],['سيارة الأمان','🚓'],['DRS','💨'],['بيت ستوب','🔧'],['الصيانة','🔧'],['الجليدي','🧊'],['جدة','🌴'],['السعودية','🌴'],['ياس','🏜️'],['البحرين','🏜️'],['الإمارات','🏜️'],['بلجيكا','🌧️'],['موناكو','🛥️'],['مونزا','🍕'],['إيطالي','🍕'],['فيراري','🍕'],['بريطانيا','☕'],['سيلفرستون','☕'],['وكينغ','☕'],['سينا','⚽'],['برازيلي','⚽'],['السرعة','⚡'],['بول','🥇'],['نقطة','💯'],['البروفيسور','🎓'],['لقب','🏆'],['بطل','🏆']];
+function iconFor(q){for(var i=0;i<ICONS.length;i++){if(q.indexOf(ICONS[i][0])>-1)return ICONS[i][1]}return '🏎️'}
+function pickOne(a){return a[Math.floor(Math.random()*a.length)]}
+var IDLE=['ركّز! لفة جديدة 🏁','الجواب في دماغك، شدّه! 🧠','يلا بسرعة قبل ما الوقت يخلص ⏱️','فكّر زي سواق محترف 😎'];
+var OKL=['إيه ده! إنت سواق ولا ساحر؟ 🔥','ضربة معلم يا بطل!','فيراري بتتصل بيك دلوقتي 📞','سرعتك خلّت الرادار يتوتر 😎','مين علّمك كده؟ 🤩'];
+var BADL=['ده حتى الموتوسيكل أسرع من إجابتك 🛵','إجابة عملت حادث على أول لفة 💥','الكراج مستنيك تصلّح الإجابة دي 🔧','هتدخل بيت ستوب تغيّر مخك؟ 🛞','لا لا لا، لسه بتتعلم السواقة 😅'];
+var TIMEL=['نمت في السباق؟ الأضواء خضرا من بدري 😴','الوقت خلص والسباق فاتك! 🐢','حتى السلحفاة كانت هتوصل قبلك 🐢'];
+function say(face,text){$('mface').textContent=face;$('bubble').textContent=text}
+function burst(list){if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;for(var i=0;i<14;i++){var e=document.createElement('span');e.className='fx';e.textContent=pickOne(list);e.style.left=Math.random()*92+'vw';e.style.animationDelay=Math.random()*0.4+'s';document.body.appendChild(e);(function(x){setTimeout(function(){x.remove()},2000)})(e)}}
+function shakeIt(){var q=document.querySelector('.qrow');q.classList.remove('shake');void q.offsetWidth;q.classList.add('shake')}
+var lastSec=0,mstyle='epic',MB=null,vol=0.5,AC=null,master=null,muted=false,musicOn=false,step=0,nextT=0,musicIv=null,NB=null;
+var CH=[[110,[440,523.25,659.25]],[87.31,[349.23,440,523.25]],[130.81,[523.25,659.25,784]],[98,[392,493.88,587.33]]];
+function initAudio(){if(AC){if(AC.state==='suspended')AC.resume();return}try{AC=new(window.AudioContext||window.webkitAudioContext)();master=AC.createGain();master.gain.value=muted?0:0.35;master.connect(AC.destination);MB=AC.createGain();MB.gain.value=vol*vol*1.2;MB.connect(master);NB=AC.createBuffer(1,AC.sampleRate*0.5,AC.sampleRate);var d=NB.getChannelData(0);for(var i=0;i<d.length;i++)d[i]=Math.random()*2-1}catch(e){AC=null}}
+function tone(f,t,d,type,v,out){var o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(0.001,t+d);o.connect(g);g.connect(out||master);o.start(t);o.stop(t+d+0.02)}
+function noise(t,d,v,hp,out){var s=AC.createBufferSource(),g=AC.createGain(),f=AC.createBiquadFilter();s.buffer=NB;f.type='highpass';f.frequency.value=hp;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(0.001,t+d);s.connect(f);f.connect(g);g.connect(out||master);s.start(t);s.stop(t+d+0.02)}
+function kick(t,out){var o=AC.createOscillator(),g=AC.createGain();o.frequency.setValueAtTime(150,t);o.frequency.exponentialRampToValueAtTime(40,t+0.12);g.gain.setValueAtTime(0.9,t);g.gain.exponentialRampToValueAtTime(0.001,t+0.18);o.connect(g);g.connect(out||master);o.start(t);o.stop(t+0.2)}
+function sched(){if(!AC||!musicOn)return;if(mstyle==='race'){schedRace();return}if(mstyle==='epic'){schedEpic();return}while(nextT<AC.currentTime+0.25){var c=CH[Math.floor(step/16)%4],s=step%16;if(s===0||s===8)tone(c[0]/2,nextT,1.2,'sine',0.22,MB);if(s%2===0)tone(c[1][[0,1,2,1,2,1,0,1][s/2]],nextT,0.7,'triangle',0.07,MB);if(s===0)c[1].forEach(function(f){tone(f/2,nextT,2.4,'sine',0.04,MB)});if(s%4===2)noise(nextT,0.05,0.02,8000,MB);step++;nextT+=0.2}}
+function pad(fs,t,d){fs.forEach(function(f){var o=AC.createOscillator(),g=AC.createGain(),l=AC.createBiquadFilter();o.type='sawtooth';o.frequency.value=f;l.type='lowpass';l.frequency.value=700;g.gain.setValueAtTime(0.0001,t);g.gain.linearRampToValueAtTime(0.035,t+d*0.5);g.gain.linearRampToValueAtTime(0.0001,t+d);o.connect(l);l.connect(g);g.connect(MB);o.start(t);o.stop(t+d+0.05)})}
+function schedEpic(){while(nextT<AC.currentTime+0.25){var bar=Math.floor(step/16)%4,c=CH[bar],s=step%16;if(s===0){pad(c[1].map(function(f){return f/2}),nextT,3.2);tone(c[0]/2,nextT,2.8,'sine',0.3,MB);kick(nextT,MB)}if(s===8)kick(nextT,MB);tone(c[1][[0,2,1,2,0,2,1,2][s%8]],nextT,0.3,'triangle',0.035+0.012*bar,MB);step++;nextT+=0.17}}
+function schedRace(){while(nextT<AC.currentTime+0.2){var c=CH[Math.floor(step/16)%4],s=step%16;if(s%4===0)kick(nextT,MB);if(s===4||s===12)noise(nextT,0.12,0.25,1500,MB);noise(nextT,0.03,s%2?0.1:0.04,7000,MB);if(s%2===0)tone(c[0],nextT,0.16,'square',0.09,MB);tone(c[1][[0,1,2,1][s%4]],nextT,0.08,'sawtooth',0.045,MB);step++;nextT+=0.11}}
+function sfx2(k){if(!AC)return;var t=AC.currentTime+0.01;
+ if(k==='q'){tone(330,t,0.12,'triangle',0.25);tone(495,t+0.1,0.12,'triangle',0.25);tone(660,t+0.2,0.25,'triangle',0.25)}
+ else if(k==='fly'){var o=AC.createOscillator(),o2=AC.createOscillator(),g=AC.createGain(),f=AC.createBiquadFilter(),pn=AC.createStereoPanner?AC.createStereoPanner():null;o.type='sawtooth';o2.type='square';[o,o2].forEach(function(x,i){var m=i?1.5:1;x.frequency.setValueAtTime(260*m,t);x.frequency.exponentialRampToValueAtTime(820*m,t+0.4);x.frequency.exponentialRampToValueAtTime(300*m,t+1)});f.type='bandpass';f.frequency.value=1100;f.Q.value=0.8;g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.3,t+0.35);g.gain.exponentialRampToValueAtTime(0.0001,t+1.05);o.connect(f);o2.connect(f);f.connect(g);if(pn){pn.pan.setValueAtTime(1,t);pn.pan.linearRampToValueAtTime(-1,t+1);g.connect(pn);pn.connect(master)}else g.connect(master);o.start(t);o2.start(t);o.stop(t+1.1);o2.stop(t+1.1);noise(t+0.15,0.6,0.1,900)}
+ else if(k==='tick')tone(1200,t,0.05,'square',0.12);
+ else if(k==='pass'){var o=AC.createOscillator(),g=AC.createGain(),f=AC.createBiquadFilter(),pn=AC.createStereoPanner?AC.createStereoPanner():null;o.type='sawtooth';o.frequency.setValueAtTime(260,t);o.frequency.exponentialRampToValueAtTime(110,t+0.9);f.type='lowpass';f.frequency.value=1400;g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.35,t+0.3);g.gain.exponentialRampToValueAtTime(0.0001,t+1);o.connect(f);f.connect(g);if(pn){pn.pan.setValueAtTime(1,t);pn.pan.linearRampToValueAtTime(-1,t+0.95);g.connect(pn);pn.connect(master)}else g.connect(master);o.start(t);o.stop(t+1.05);noise(t,0.9,0.12,500)}
+ else if(k==='skid'){noise(t,0.6,0.35,1800);tone(160,t,0.4,'sawtooth',0.15)}
+ else if(k==='sputter'){[0,0.15,0.35,0.6].forEach(function(d,i){tone(90-i*10,t+d,0.12,'sawtooth',0.25)})}}
+function musicStart(){if(!AC||musicOn)return;musicOn=true;step=0;nextT=AC.currentTime+0.05;musicIv=setInterval(sched,25)}
+function musicStop(){musicOn=false;clearInterval(musicIv)}
+function sfx(k){if(!AC)return;var t=AC.currentTime+0.01;if(k==='beep')tone(520,t,0.18,'square',0.25);else if(k==='go')tone(1040,t,0.5,'square',0.3);else if(k==='ok'){tone(660,t,0.12,'triangle',0.4);tone(990,t+0.1,0.22,'triangle',0.4)}else if(k==='bad')tone(160,t,0.35,'sawtooth',0.3);else if(k==='win'){[523,659,784,1047].forEach(function(f,i){tone(f,t+i*0.12,0.3,'triangle',0.4)})}}
+try{var sv=localStorage.getItem('f1vol');if(sv!==null){vol=Math.min(1,Math.max(0,+sv/100));$('vol').value=Math.round(vol*100);$('volv').textContent=Math.round(vol*100)+'%'}}catch(e){}
+var STY={race:['🏁','موسيقى سباق'],epic:['🎬','موسيقى سينمائية'],calm:['🌙','موسيقى هادئة']};
+function setStyle(m,save){mstyle=m;$('mstyle').textContent=STY[m][0];$('mstyle').setAttribute('aria-label',STY[m][1]);if(save){try{localStorage.setItem('f1style',m)}catch(e){}}if(musicOn){step=0;nextT=AC.currentTime+0.05}}
+try{var ms=localStorage.getItem('f1style');setStyle(STY[ms]?ms:'epic',false)}catch(e){setStyle('epic',false)}
+$('mstyle').onclick=function(){setStyle(mstyle==='race'?'epic':mstyle==='epic'?'calm':'race',true)};
+$('vol').oninput=function(){vol=this.value/100;$('volv').textContent=this.value+'%';if(MB)MB.gain.value=vol*vol*1.2;try{localStorage.setItem('f1vol',this.value)}catch(e){}};
+$('mute').onclick=function(){muted=!muted;if(master)master.gain.value=muted?0:0.35;this.textContent=muted?'🔇':'🔊';this.setAttribute('aria-pressed',muted)};
+var online={db:null,room:null,uid:null};
+try{$('nick').value=localStorage.getItem('f1nick')||''}catch(e){}
+$('nick').addEventListener('input',function(){try{localStorage.setItem('f1nick',myNick())}catch(e){}});
+function myNick(){return $('nick').value.trim().slice(0,20)}
+function showOnline(){$('online').classList.remove('hide')}
+function boardMsg(t){var ol=$('board');ol.innerHTML='';var li=document.createElement('li');li.textContent=t;ol.appendChild(li)}
+function renderBoard(docs){
+  if(!docs.length){boardMsg('لا توجد نتائج بعد. كن أول المتصدرين!');return}
+  var ol=$('board');ol.innerHTML='';
+  docs.forEach(function(d,i){var x=d.data()||{};var li=document.createElement('li');if(d.id===online.uid)li.className='me';
+    var a=document.createElement('span');a.textContent=(i+1)+'. '+String(x.name||'مجهول').slice(0,20);
+    var b=document.createElement('span');b.textContent=(+x.best||0)+' نقطة';
+    li.appendChild(a);li.appendChild(b);ol.appendChild(li)});
+}
+function startBoard(db){
+  if(!db)return;online.db=db;showOnline();
+  boardMsg('جارٍ تحميل الترتيب...');
+  var wait=setTimeout(function(){boardMsg('تعذر تحميل الترتيب الآن.')},10000);
+  db.collection('scores').orderBy('best','desc').limit(10).onSnapshot(function(sn){if(!sn.metadata.fromCache)clearTimeout(wait);renderBoard(sn.docs)},function(){clearTimeout(wait);boardMsg('تعذر تحميل الترتيب الآن.')});
+}
+function startRoom(room){
+  if(!room)return;online.room=room;showOnline();
+  room.onPeers(function(c){var n=c.peers.filter(function(p){return p.kind==='viewer'}).length;$('onl').textContent='متصل الآن: '+n});
+  room.on('finish',function(m){var d=m.data||{};if(typeof d.score!=='number')return;$('feed').textContent=String(d.name||'لاعب').slice(0,20)+' أنهى السباق بـ '+Math.round(d.score)+' نقطة'});
+}
+function submitScore(p){
+  var nm=myNick(),sv=$('saved');sv.textContent='';
+  if(online.room&&nm)online.room.emit('finish',{name:nm,score:p}).catch(function(){});
+  if(!online.db)return;
+  if(!nm){sv.textContent='اكتب اسمك في الصفحة الرئيسية لتظهر في لوحة المتصدرين.';return}
+  if(!online.uid){sv.textContent='سجّل الدخول لحفظ نتيجتك في الترتيب.';return}
+  var ref;try{ref=online.db.doc('scores/'+online.uid)}catch(e){return}
+  ref.get().then(function(sn){var prev=sn.exists?(+sn.data().best||0):0;
+    if(p>prev)return ref.set({name:nm,best:p,at:Date.now()}).then(function(){sv.textContent='تم حفظ نتيجتك في لوحة المتصدرين.'});
+    sv.textContent='أفضل نتيجة لك في الترتيب هي '+prev+' نقطة.'
+  }).catch(function(){sv.textContent='تعذر حفظ نتيجتك. قد يكون حسابك للعرض فقط.'});
+}
+$('share').onclick=function(){var t='جبت '+$('final').textContent+' نقطة في تحدي Speed Zone Kareem للفورمولا 1! تقدر تكسر رقمي؟ '+location.href;var b=this;
+  if(navigator.share){navigator.share({text:t}).catch(function(){})}
+  else if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){b.textContent='تم النسخ ✓'}).catch(function(){})}};
+$('start').onclick=start;$('again').onclick=start;$('next').onclick=next;
+showBest();
+</script>
+</body>
+</html>
